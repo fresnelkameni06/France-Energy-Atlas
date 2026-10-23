@@ -1,0 +1,24 @@
+
+# COMPLETE YOUR INFORMATION HERE
+
+[student]
+full_name = "fresnel kameni"
+program = "DATA & AI engineering cycle"
+year = "4"
+email = "fresnel.cheuwebe-kameni@efrei.net"
+linkedin = "https://www.linkedin.com/in/fresnel-kameni/"
+portfolio = "https://fresnelkameni06.github.io/fresnelk.github.io/"
+github = "https://github.com/fresnelkameni06/"
+
+[course]
+name = "DATA ANALYSIS & VISUALIZATION"
+project_proposed_by = "Prof. Mano Mathew"
+professor_linkedin_or_email = "https://www.linkedin.com/in/manomathew/"
+
+[project]
+title = "France Energy Atlas | 2020–2026"
+institution = "EFREI Paris"
+
+
+
+

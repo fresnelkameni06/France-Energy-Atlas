@@ -1,0 +1,10 @@
+[dataset]
+workbook = "data/france_energy_2020_2026.xlsx"
+first_year = 2020
+last_year = 2026
+country = "France"
+provider = "RTE / ODRÉ"
+source_url = "https://odre.opendatasoft.com/"
+
+[publication]
+refresh_policy = "Every 3 days when a newer Excel source is available"

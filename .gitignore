@@ -1,0 +1,23 @@
+# Python
+venv_viz/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Local and temporary files
+*.bak
+*.log
+.env
+.env.*
+.vscode/
+.streamlit/secrets.toml
+
+# Original large datasets
+data/energy.db
+data/france_energy_2020_2026.xlsx
+data/raw/
+
+# Operating system
+.DS_Store
+Thumbs.db

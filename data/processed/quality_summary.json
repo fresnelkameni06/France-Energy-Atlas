@@ -1,0 +1,97 @@
+{
+  "sha256": "2567c7f245612f22cf63d588fc23a7aac9dc7ad3ac0f2a16d190c502fa0f41b3",
+  "prepared_utc": "2026-10-23T21:46:42.107196+00:00",
+  "workbook_name": "france_energy_2020_2026.xlsx",
+  "source_size_mb": 91.12,
+  "years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "sheet_reports": [
+    {
+      "input_rows": 210792,
+      "output_rows": 210792,
+      "invalid_or_duplicate_or_superseded": 0,
+      "superseded_live_rows": 0,
+      "null_consumption_rows": 0,
+      "sheet": 2020,
+      "observation_start_utc": "2020-01-01T00:00:00+00:00",
+      "observation_end_utc": "2020-12-31T23:30:00+00:00"
+    },
+    {
+      "input_rows": 210216,
+      "output_rows": 210216,
+      "invalid_or_duplicate_or_superseded": 0,
+      "superseded_live_rows": 0,
+      "null_consumption_rows": 0,
+      "sheet": 2021,
+      "observation_start_utc": "2021-01-01T00:00:00+00:00",
+      "observation_end_utc": "2021-12-31T23:30:00+00:00"
+    },
+    {
+      "input_rows": 210216,
+      "output_rows": 210216,
+      "invalid_or_duplicate_or_superseded": 0,
+      "superseded_live_rows": 0,
+      "null_consumption_rows": 0,
+      "sheet": 2022,
+      "observation_start_utc": "2022-01-01T00:00:00+00:00",
+      "observation_end_utc": "2022-12-31T23:30:00+00:00"
+    },
+    {
+      "input_rows": 210216,
+      "output_rows": 210216,
+      "invalid_or_duplicate_or_superseded": 0,
+      "superseded_live_rows": 0,
+      "null_consumption_rows": 0,
+      "sheet": 2023,
+      "observation_start_utc": "2023-01-01T00:00:00+00:00",
+      "observation_end_utc": "2023-12-31T23:30:00+00:00"
+    },
+    {
+      "input_rows": 210792,
+      "output_rows": 210792,
+      "invalid_or_duplicate_or_superseded": 0,
+      "superseded_live_rows": 0,
+      "null_consumption_rows": 0,
+      "sheet": 2024,
+      "observation_start_utc": "2024-01-01T00:00:00+00:00",
+      "observation_end_utc": "2024-12-31T23:30:00+00:00"
+    },
+    {
+      "input_rows": 210216,
+      "output_rows": 210216,
+      "invalid_or_duplicate_or_superseded": 0,
+      "superseded_live_rows": 0,
+      "null_consumption_rows": 12,
+      "sheet": 2025,
+      "observation_start_utc": "2025-01-01T00:00:00+00:00",
+      "observation_end_utc": "2025-12-31T23:30:00+00:00"
+    },
+    {
+      "input_rows": 200880,
+      "output_rows": 200880,
+      "invalid_or_duplicate_or_superseded": 0,
+      "superseded_live_rows": 0,
+      "null_consumption_rows": 96,
+      "sheet": 2026,
+      "observation_start_utc": "2026-01-01T00:00:00+00:00",
+      "observation_end_utc": "2026-10-23T21:45:00+00:00"
+    }
+  ],
+  "total_input_rows": 1463328,
+  "total_prepared_rows": 1463328,
+  "source_counts": {
+    "eco2mix-regional-cons-def": 1402368,
+    "eco2mix-regional-tr": 60960
+  },
+  "date_min": "2020-01-01",
+  "date_max": "2026-10-23",
+  "unique_regions": 12,
+  "daily_rows": 29856
+}

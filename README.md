@@ -1,202 +1,172 @@
-# France Energy Atlas | 2020–2026
+# ⚡ France Energy Atlas (2020–2026)
 
-### Interactive Electricity Data Storytelling Dashboard
+**An interactive data-storytelling dashboard exploring regional electricity demand and generation in France.**
 
-**EFREI Paris — Individual Student Project**  
+[**🌐 Explore the live dashboard**](https://france-energy-atlas-fk.streamlit.app/) · [**📊 Open data: RTE / ODRÉ**](https://odre.opendatasoft.com/) · **EFREI Paris — Individual Student Project**
+
+> **Project question:** How have electricity consumption and generation patterns evolved across 12 metropolitan French regions between 2020 and 2026, and which temporal and geographical differences deserve closer investigation?
+
 **Course:** Data Visualization & Data Storytelling  
-**Supervisor:** Prof. Mano Joseph Mathew  
-**Technology:** Python · Streamlit · Pandas · Plotly · SQLite · Excel · Parquet
+**Academic supervisor:** Prof. Mano Joseph Mathew (EFREI Paris)  
+**Stack:** Python 3.12 · Streamlit · Pandas · NumPy · Plotly · SQLite · Excel · Parquet · GitHub Actions
 
-## Overview
+## Project at a glance
 
-France Energy Atlas is an interactive data storytelling dashboard exploring electricity consumption and generation across **12 metropolitan French regions from 2020 to 2026**.
+| Dataset snapshot | Value |
+|---|---:|
+| Validated interval observations | **1,463,328** |
+| Metropolitan regions | **12** |
+| Years represented | **2020–2026** |
+| Region-day aggregate records | **29,856** |
+| Missing demand measurements | **108** |
+| Storytelling chapters | **14** |
+| Primary interactive chart families | **8** |
 
-Using official open data from **RTE / ODRÉ**, the project transforms complex regional electricity measurements into accessible insights about historical trends, geographical disparities, energy generation, seasonal patterns and data quality.
+*These figures refer to the locally validated analytical snapshot; they are **not** live counters. The 2026 data cover only part of the year. The exact latest reporting date is shown within the application.*
 
-**Research question:** How have electricity consumption and generation patterns evolved across French regions, and what regional and temporal differences can we identify?
+## The story: 14 connected chapters
 
-## Live Dashboard & Demo
+Rather than presenting isolated charts, France Energy Atlas follows **Hook → Context → Analysis → Insights → Implications**.
 
-- **Streamlit Application:** [Add deployed application URL]
-- **GitHub Repository:** [Add repository URL]
-- **Video Demonstration (2–4 minutes):** [Add video URL]
-- **Student Portfolio:** [Add portfolio URL]
-
-## Key Features
-
-The dashboard provides:
-
-- 14 interactive storytelling chapters.
-- 8 visualization types: line chart, bar chart, map, stacked area chart, heatmap, box plot, scatter plot and histogram.
-- Interactive year, region and date selections.
-- Dynamic KPIs and analytical insights.
-- Regional electricity consumption and generation comparisons.
-- Data quality, missingness and duplicate checks.
-- Methodological explanations and responsible interpretation.
-
-### Dashboard Chapters
-
-| # | Chapter | Purpose |
+| Chapter | What it answers | Presentation |
 |---|---|---|
-| 01 | Introduction | Research context and problem |
-| 02 | Overview | Electricity demand trends |
-| 03 | Historical Evolution | Annual comparisons |
-| 04 | Regional Ranking | Regional demand differences |
-| 05 | Regional Map | Geographical exploration |
-| 06 | Generation Mix | Electricity production by source |
-| 07 | Hourly Patterns | Daily and weekly demand |
-| 08 | Seasonal Variability | Monthly demand distributions |
-| 09 | Correlations | Demand–generation relationships |
-| 10 | Distribution & Peaks | Extreme-value exploration |
-| 11 | Data Quality & EDA | Data reliability |
-| 12 | Conclusions & Actions | Key findings and implications |
-| 13 | Methodology | Data pipeline and limitations |
-| 14 | Student & Credits | Academic and author information |
+| 01 · Introduction | Why are French regional electricity patterns worth studying? | Motivation, scope, central question |
+| 02 · Overview | When does recorded demand rise or fall? | **Interactive line chart** and dynamic KPIs |
+| 03 · Historical Evolution | How can 2020–2026 be compared fairly? | Annual summaries and coverage caveats |
+| 04 · Regional Ranking | Which regions report higher average demand? | **Horizontal bar chart** |
+| 05 · Regional Map | Where are those regions located? | **Interactive geographical map** |
+| 06 · Generation Mix | How do generation technologies contribute over time? | **Stacked area chart** |
+| 07 · Hourly Patterns | When during the week is demand relatively high? | **Weekday × hour heatmap** |
+| 08 · Seasonal Variability | How does demand variability differ by month? | **Monthly box plots** |
+| 09 · Correlations | Are regional demand and generation associated? | **Scatter plot** and Pearson's *r* |
+| 10 · Distribution & Peaks | How unusual are high measurements? | **Histogram** and 99th percentile |
+| 11 · Data Quality & EDA | How complete and consistent are the data? | Missingness and validation indicators |
+| 12 · Conclusions & Actions | What can we conclude from the current selection? | Filter-aware findings and next steps |
+| 13 · Methodology | Where do the data come from, and what assumptions were made? | Provenance, transformations, limitations |
+| 14 · Student & Credits | Who developed the work? | EFREI identification, GitHub, LinkedIn, portfolio |
 
-## Data Source
+The interface provides left-side chapter navigation and purposeful selections of years, regions, dates and relevant indicators. Charts include contextual interpretation rather than unsupported causal explanations.
 
-**Provider:** RTE — Réseau de Transport d'Électricité  
-**Platform:** ODRÉ — Open Data Réseaux Énergies  
-**Website:** https://odre.opendatasoft.com/
+## Official data sources and licensing
 
-Original datasets:
+The original observations were obtained from official **RTE / ODRÉ éCO2mix regional electricity datasets**:
 
-- `eco2mix-regional-cons-def` — Historical regional electricity data.
-- `eco2mix-regional-tr` — Provisional regional electricity data.
+- [Consolidated and definitive regional measurements — `eco2mix-regional-cons-def`](https://odre.opendatasoft.com/explore/dataset/eco2mix-regional-cons-def/) (generally 30-minute intervals).
+- [Provisional regional measurements — `eco2mix-regional-tr`](https://odre.opendatasoft.com/explore/dataset/eco2mix-regional-tr/) (15-minute intervals).
+- [French government open-data catalogue](https://www.data.gouv.fr/datasets/donnees-eco2mix-regionales-consolidees-et-definitives).
 
-The prepared snapshot contains **1,463,328 observations**, covering 12 regions and seven calendar years.
+**Attribution:** Data © RTE / ODRÉ, made available under **Licence Ouverte / Open Licence 2.0 (Etalab)**. This project is an independent academic analysis, not an official RTE publication. Source details and the associated reuse requirements are discussed in [`docs/sources_and_licenses.md`](docs/sources_and_licenses.md).
 
-**Note:** 2026 is incomplete. Historical and provisional data may have different sampling intervals.
+## Data Engineering and reproducibility
 
-## Data Engineering Pipeline
+The project was built in **two distinct stages**:
 
-The project was developed through two complementary pipelines.
+```text
+HISTORICAL ACQUISITION & STORAGE
+Official RTE / ODRÉ API
+          ↓
+Python extraction and cleaning
+          ↓
+SQLite database (data/energy.db, local)
+          ↓
+Excel export (2020–2026 annual worksheets, local)
 
-**Original collection and consolidation:**
+DASHBOARD PREPARATION & EXECUTION
+Existing Excel workbook
+          ↓
+Pandas normalization + automated validation
+          ↓
+Compressed Parquet facts + region-day aggregates
+          ↓
+Streamlit + Plotly interactive chapters
+```
 
-`RTE API → Python Extraction → Cleaning → SQLite → Excel`
+The historical acquisition and SQL scripts are retained under `archive/data_engineering/`. The current deployed application reads **prepared Parquet**, not the SQLite database or RTE API directly. An unrefreshed Excel workbook will not create new observations.
 
-**Current dashboard preparation:**
+**Important methodological decisions:**
 
-`Excel → Pandas Validation → Parquet → Streamlit`
+- Preserve missing measurements; do not replace unknown data with zero.
+- Deduplicate observations and give definitive data priority when source periods overlap.
+- Normalize timestamps to UTC; derive local calendar fields in `Europe/Paris`.
+- Convert **power (MW)** into **energy (MWh)** using interval duration: `MWh = MW × hours` (0.5 h historical; 0.25 h provisional).
+- Document unequal temporal coverage, especially incomplete 2026.
+- Treat correlations as descriptive relationships, **not causal effects**.
+- Use deterministic sampling where needed for interactive chart performance.
 
-The original API extraction, cleaning and SQLite scripts are preserved in `archive/data_engineering/`.
-
-The dashboard operates on prepared local datasets and does not fetch new RTE measurements whenever a user opens the application.
-
-## Project Structure
+## Repository layout
 
 ```text
 France-Energy-Atlas/
-├── app.py                  # Main Streamlit application
-├── sections/               # 14 storytelling chapters
-├── utils/                  # Data loading and visualization
-├── scripts/                # Preparation and validation
-├── pipeline/               # Excel processing
-├── archive/data_engineering/ # Original API and SQLite workflow
-├── data/
-│   └── processed/          # Prepared analytical datasets
-├── docs/                   # Reports and documentation
-├── tests/                  # Automated tests
-├── assets/                 # EFREI logo
-├── config/                 # Project and student metadata
-├── .streamlit/             # Application theme
+├── app.py                      # Streamlit entry point and filters
+├── sections/                   # Fourteen analytical and narrative chapters
+├── utils/                      # Data loading, schemas, preparation, plotting
+├── scripts/                    # Offline preparation and data validation
+├── pipeline/                   # Excel data-processing module
+├── archive/data_engineering/   # Historical RTE API, cleaning, SQLite, export
+├── data/processed/             # Optimized Parquet files + quality metadata
+├── config/                     # Student and application metadata (no secrets)
+├── assets/                     # Institutional branding
+├── docs/                       # Report, EDA, storyboard, sources, demo script
+├── tests/                      # Unit tests
+├── .github/workflows/          # CI and optional data-refresh workflow
+├── .streamlit/config.toml      # Visual theme
 ├── requirements.txt
 └── README.md
 ```
 
-## Installation and Local Execution
+The original database `data/energy.db`, Excel workbook and virtual environment are intentionally **not required in the published application repository**. A dataset-source link is provided as an alternative to bundling large original files.
 
-**Requirements:** Python 3.12 and an internet connection for initial package installation.
+## Run locally
 
-Clone or download the repository, then open a terminal in the project folder.
-
-**1. Create and activate a virtual environment (Windows PowerShell):**
+Requires **Python 3.12**. In PowerShell, from the repository root:
 
 ```powershell
 python -m venv venv_viz
 .\venv_viz\Scripts\Activate.ps1
-```
-
-**2. Install dependencies:**
-
-```powershell
 python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
+python -m scripts.validate_data
+python -m streamlit run app.py --server.port 8502
 ```
 
-**3. Prepare the analytical data (if not already provided):**
-
-Place `france_energy_2020_2026.xlsx` inside `data/`, then execute:
+If `data/processed/` is absent, first obtain the **consolidated project Excel workbook** (`data/france_energy_2020_2026.xlsx`) and run:
 
 ```powershell
 python -m scripts.prepare_data
 python -m scripts.validate_data
 ```
 
-**4. Launch the dashboard:**
+The official RTE dataset links above provide the original public source, **not an automatically identical copy of this seven-worksheet consolidated workbook**. Rebuilding the exact workbook from scratch requires the historical Data Engineering workflow.
 
-```powershell
-python -m streamlit run app.py
-```
+## Continuous integration and planned refresh automation
 
-Open the local URL displayed in the terminal.
+**Already demonstrated:** the GitHub Actions workflow **France Energy Atlas – Quality Checks** completed successfully after a push. It installs dependencies, runs unit tests and validates the prepared analytical data. A green CI check does **not** mean that new RTE measurements have been downloaded.
 
-**Important:** The Excel workbook is needed to rebuild the analytical data. If the prepared Parquet datasets are already included, the dashboard can read them directly.
+**Planned, not yet verified end-to-end:** an Excel-based refresh workflow (`refresh_excel.yml`) can be enabled after a maintained, updated workbook is made available via a configured URL or GitHub Release asset. The intended sequence is:
 
-## Data Quality and Reproducibility
+1. Acquire an **updated** Excel workbook from the configured source.
+2. Validate and regenerate the Parquet analytical datasets.
+3. Commit the changed Parquet data to GitHub.
+4. Let Streamlit Community Cloud synchronize with the updated repository.
 
-The project includes:
+If the Excel source has not changed, **no new electricity readings can appear**. Future work may connect the archived RTE API extraction pipeline to a scheduled, tested ingestion job, with source-rate limits, validation and failure notifications.
 
-- Duplicate and invalid-value checks.
-- Explicit handling of missing measurements.
-- UTC timestamp normalization and French local-time conversion.
-- MW-to-MWh conversion using observation durations.
-- Definitive-source prioritization when historical and provisional records overlap.
-- Automated preprocessing tests.
+## Deployment and project deliverables
 
-Run the tests with:
+- **Live dashboard:** https://france-energy-atlas-fk.streamlit.app/
+- **GitHub repository:** https://github.com/fresnelkameni06/France-Energy-Atlas/
+- **Academic report:** [`docs/France_Energy_Atlas_Report.pdf`](docs/France_Energy_Atlas_Report.pdf)
+- **Detailed storyboard:** [`docs/storyboard.md`](docs/storyboard.md)
+- **Student portfolio:** https://fresnelkameni06.github.io/fresnelk.github.io/
 
-```powershell
-python -m unittest discover -s tests -v
-```
 
-## Deployment
 
-The application is designed for **Streamlit Community Cloud**, connected to this GitHub repository.
+## Limitations and ethical interpretation
 
-The deployment must have access to the prepared analytical datasets under `data/processed/`. Large raw datasets and the original SQLite database are not required for normal dashboard execution.
+This is an exploratory, descriptive academic project—not a forecast, operational monitoring service or proof of policy impact. Regional demand is not adjusted for population, weather or industrial structure. The map uses representative locations rather than power-plant coordinates. Regionally generated power is not necessarily consumed locally. Missing records, provisional revisions and incomplete-year data may influence totals.
 
-A GitHub Actions configuration is included for dataset preparation. New electricity observations require an updated external source workbook; the dashboard does not perform automatic live RTE collection.
+## Acknowledgements
 
-## Documentation
+Developed at **EFREI Paris** for an individual Data Visualization & Data Storytelling assignment proposed by **Prof. Mano Joseph Mathew**. We thank **RTE / ODRÉ** for providing reusable official electricity data.
 
-Detailed documentation is available in `docs/`:
-
-- `project_brief.md` — Introduction, problem and objectives.
-- `analysis_plan.md` — Research questions and analytical strategy.
-- `methodology.md` — Data engineering and transformations.
-- `eda_report.md` — Exploratory data analysis.
-- `database_audit.md` — Quality and validation.
-- `storyboard.md` — Detailed explanation of the 14 chapters.
-- `data_dictionary.md` — Dataset variables.
-- `sources_and_licenses.md` — Data sources and attribution.
-- `demo_script.md` — Video demonstration script.
-- `submission_checklist.md` — Final submission requirements.
-
-## Limitations
-
-The dashboard is descriptive, not predictive. Regional values are not adjusted for population, weather or economic activity. Correlations do not imply causation, and incomplete-year comparisons require particular care.
-
-## Author and Acknowledgements
-
-**Developed by:** [Student Full Name]  
-**Institution:** EFREI Paris  
-**Program:** [Academic Program]  
-**Academic Year:** [Academic Year]  
-**Supervisor:** Prof. Mano Joseph Mathew
-
-Thanks to RTE / ODRÉ for making regional electricity data publicly available.
-
----
-
-**France Energy Atlas — Turning electricity data into meaningful stories.**
+*France Energy Atlas — turning official electricity measurements into an interpretable, interactive regional story.*
